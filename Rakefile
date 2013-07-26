@@ -55,3 +55,7 @@ require "bundler/gem_tasks"
   end
 
 
+
+task :test do
+	true
+end

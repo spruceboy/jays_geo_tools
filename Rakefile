@@ -3,10 +3,13 @@ require "bundler/gem_tasks"
 
 
 
-  task :compile => [:clean, :check_gdal, :build_cc_stuff]
+bins = ["add_mask","masker","no_data_check","get_gcp","modis_natural_color_stretch","image_info","npp_natural_color_stretch"]
+
+
+  task :compile => [:clean, :check_gdal, :build_cc_stuff, :check]
 
   task :clean do
-	["add_mask","masker","no_data_check","get_gcp","modis_natural_color_stretch","image_info","npp_natural_color_stretch"].each do |x|
+	bins.each do |x|
 		system("rm -v bin/#{x}") if (File.exists?("bin/"+x))
 	end
   end
@@ -41,7 +44,7 @@ require "bundler/gem_tasks"
   end
 
   task :modis_natural_color_stretch do
-    puts("Building \":modis_natural_color_stretch\"")
+    puts("Building \"modis_natural_color_stretch\"")
     system("gcc $(gdal-config --cflags) -o ./bin/modis_natural_color_stretch ext/jays_geo_tools/modis_natural_color_stretch.c $(gdal-config --libs)")
   end
 
@@ -54,7 +57,12 @@ require "bundler/gem_tasks"
     system(" gcc -O3  $(gdal-config --cflags) -o ./bin/npp_natural_color_stretch ext/jays_geo_tools/npp_natural_color_stretch.c $(gdal-config --libs)")
   end
 
-
+  task :check do 
+        bins.each do |x|
+                raise("Error building tool \"\#{s}\"") if (!File.exists?("bin/"+x) || File.executable?("bin/"+x))
+        end
+	puts("Successfully installed")
+  end
 
 task :test do
 	true

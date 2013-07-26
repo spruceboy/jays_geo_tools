@@ -59,7 +59,7 @@ bins = ["add_mask","masker","no_data_check","get_gcp","modis_natural_color_stret
 
   task :check do 
         bins.each do |x|
-                raise("Error building tool \"\#{s}\"") if (!File.exists?("bin/"+x) || File.executable?("bin/"+x))
+                raise("Error building tool \"#{x}\"") if (!File.exists?("bin/"+x) || !File.executable?("bin/"+x))
         end
 	puts("Successfully installed")
   end

@@ -35,11 +35,6 @@ require "bundler/gem_tasks"
     system("gcc $(gdal-config --cflags) -o  ./bin/no_data_check ext/jays_geo_tools/no_data_check.c $(gdal-config --libs)")
   end
 
-  task :git_pull do
-    system("git pull origin master")
-  end
-
-
   task :get_gcp do
     puts("Building \"get cgp\"")
     system("gcc -g $(gdal-config --cflags) -o ./bin/get_gcp ext/jays_geo_tools/get_gcp.c $(gdal-config --libs)")

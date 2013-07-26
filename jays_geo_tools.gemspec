@@ -4,8 +4,8 @@ require File.expand_path('../lib/jays_geo_tools/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["JC"]
   gem.email         = ["jay@spruceboy.net"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{A handful of tools that are supposed to be helfull in processing of geospacial data.}
+  gem.summary       = %q{fill this out}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)

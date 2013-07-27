@@ -1,6 +1,7 @@
 #!/usr/bin/env rake
-require "bundler/gem_tasks"
 
+
+ task :default => [:compile]
 
 
 bins = ["add_mask","masker","no_data_check","get_gcp","modis_natural_color_stretch","image_info","npp_natural_color_stretch"]
@@ -25,41 +26,41 @@ bins = ["add_mask","masker","no_data_check","get_gcp","modis_natural_color_stret
 
   task :add_mask do
     puts("Building \"add_mask\"")
-    system("gcc $(gdal-config --cflags) -o ./bin/add_mask ext/jays_geo_tools/add_mask.c $(gdal-config --libs)")
+    system("gcc $(gdal-config --cflags) -o ../../bin/add_mask add_mask.c $(gdal-config --libs)")
   end
 
   task :masker do
     puts("Building \"masker\"")
-    system("gcc $(gdal-config --cflags) -o ./bin/masker ext/jays_geo_tools/masker.c $(gdal-config --libs)")
+    system("gcc $(gdal-config --cflags) -o ../../bin/masker masker.c $(gdal-config --libs)")
   end
 
   task :no_data_check do
     puts("Building \"no_data_check\"")
-    system("gcc $(gdal-config --cflags) -o  ./bin/no_data_check ext/jays_geo_tools/no_data_check.c $(gdal-config --libs)")
+    system("gcc $(gdal-config --cflags) -o  ../../bin/no_data_check no_data_check.c $(gdal-config --libs)")
   end
 
   task :get_gcp do
     puts("Building \"get cgp\"")
-    system("gcc -g $(gdal-config --cflags) -o ./bin/get_gcp ext/jays_geo_tools/get_gcp.c $(gdal-config --libs)")
+    system("gcc -g $(gdal-config --cflags) -o ../../bin/get_gcp get_gcp.c $(gdal-config --libs)")
   end
 
   task :modis_natural_color_stretch do
     puts("Building \"modis_natural_color_stretch\"")
-    system("gcc $(gdal-config --cflags) -o ./bin/modis_natural_color_stretch ext/jays_geo_tools/modis_natural_color_stretch.c $(gdal-config --libs)")
+    system("gcc $(gdal-config --cflags) -o ../../bin/modis_natural_color_stretch modis_natural_color_stretch.c $(gdal-config --libs)")
   end
 
   task :image_info  do
     puts("Building image_info..")
-    system("g++ -Wno-conversion-null  $(gdal-config --cflags) -o ./bin/image_info ext/jays_geo_tools/image_info.cpp $(gdal-config --libs)")
+    system("g++ -Wno-conversion-null  $(gdal-config --cflags) -o ../../bin/image_info image_info.cpp $(gdal-config --libs)")
   end
 
   task :npp_natural_color_stretch do
-    system(" gcc -O3  $(gdal-config --cflags) -o ./bin/npp_natural_color_stretch ext/jays_geo_tools/npp_natural_color_stretch.c $(gdal-config --libs)")
+    system(" gcc -O3  $(gdal-config --cflags) -o ../../bin/npp_natural_color_stretch npp_natural_color_stretch.c $(gdal-config --libs)")
   end
 
   task :check do 
         bins.each do |x|
-                raise("Error building tool \"#{x}\"") if (!File.exists?("bin/"+x) || !File.executable?("bin/"+x))
+                raise("Error building tool \"#{x}\"") if (!File.exists?("../../bin/"+x) || !File.executable?("../../bin/"+x))
         end
 	true
   end
